@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
+/* TODO: Configurar solo temas utilizados */
+@plugin "daisyui" {
+  /* themes: light --default, dark --prefersdark, cupcake; */
+  themes: all;
+}
