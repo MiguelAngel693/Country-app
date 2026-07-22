@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'search-input',
@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './search-input.html',
 })
 export class SearchInput {
-
-  onSearch(value: string){
-    console.log({value});
-  }
+  value = output<string>();
+  placeHolder = input('Buscar');
 }
