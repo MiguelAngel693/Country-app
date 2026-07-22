@@ -9,4 +9,9 @@ import { List } from "../../components/list/list";
 })
 export class ByCapital {
 
+  onSearch(event: string){
+    console.log({event});
+
+
+  }
 }
