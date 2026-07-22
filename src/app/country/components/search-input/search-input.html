@@ -1,0 +1,4 @@
+<section class="flex flex-row gap-2 mt-2">
+  <input class="input input-bordered mr-2 w-56 " type="text" placeholder="Buscar capital" autofocus #search (keyup.enter)="onSearch(search.value)">
+  <button class="btn btn-primary" (click)="onSearch(search.value)">Buscar</button>
+</section>
