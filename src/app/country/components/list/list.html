@@ -16,7 +16,7 @@
        @for (country of countries(); track country.code) {
         <tr>
           <td>{{country.code}}</td>
-          <td><img class="w-64" [src]="country.flagSvg" alt=""></td>
+          <td><img class="w-64" [src]="country.flagSvg" alt="Bandera no disponible"></td>
           <td>{{country.name}}</td>
           <td>{{country.capital}}</td>
           <td>{{country.population | number}}</td>
