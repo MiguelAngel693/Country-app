@@ -3,8 +3,8 @@ import { SearchInput } from "../../components/search-input/search-input";
 import { List } from "../../components/list/list";
 import { CountryService } from '../../services/CountryService';
 import { Country } from '../../interfaces/country.interface';
-import { firstValueFrom } from 'rxjs';
-
+import { firstValueFrom, of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop'
 @Component({
   selector: 'by-capital',
   imports: [SearchInput, List],
@@ -14,16 +14,35 @@ export class ByCapital {
   country = inject(CountryService);
   query = signal('');
 
-  countryResource = resource({
+  countryResource = rxResource({
     params: () => ({ query: this.query() }),
-    loader: async ({ params }) => {
-      if (!params.query) return [];
+    stream: ({ params }) => {
+      if (!params.query) return of([]);
 
-      return await firstValueFrom(
-        this.country.searchByCapital(this.query()),
-      )
+      return this.country.searchByCapital(this.query())
     }
   })
+
+
+  // countryResource = rxResource({
+  //   params: () => ( {query: this.query()} ),
+  //   stream: ({params}) => {
+  //     if(!params.query) return of([]);
+  //     return  this.countryService.searchByCountry(params.query)
+
+
+  //   }
+  // })
+  // countryResource = resource({
+  //   params: () => ({ query: this.query() }),
+  //   loader: async ({ params }) => {
+  //     if (!params.query) return [];
+
+  //     return await firstValueFrom(
+  //       this.country.searchByCapital(this.query()),
+  //     )
+  //   }
+  // })
 
 
 
