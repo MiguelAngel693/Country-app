@@ -1,2 +1,7 @@
-<search-input placeHolder="Buscar capital" (value)="onSearch($event)"></search-input>
-<list [countries]="countries()"/>
+<search-input placeHolder="Buscar capital" (value)="query.set($event)"></search-input>
+@if (countryResource.error()) {
+  <h3>{{countryResource.error()}}</h3>
+}@if(countryResource.hasValue()) {
+  <list [countries]="countryResource.value()!" />
+}
+
