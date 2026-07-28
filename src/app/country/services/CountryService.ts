@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@environments/environment';
 import { RestCountryResponse } from '../interfaces/rest-countries';
-import { map, tap } from 'rxjs';
+import { catchError, map} from 'rxjs';
 import { CountryMapper } from '../mappers/country.mapper';
 @Injectable({
   providedIn: 'root',
 })
 export class CountryService {
   private http = inject(HttpClient);
-  private isLoading = signal(false);
 
   private search(query: string, endpoint: string) {
     return this.http.get<RestCountryResponse>(`${environment.countriesUrl}${endpoint}`, {
@@ -19,17 +18,20 @@ export class CountryService {
         q: query
       }
     }).pipe(
-      map(resp => CountryMapper.mapCountryResponseArrayToCountryArray(resp.data.objects ?? []))
+      map(resp => CountryMapper.mapCountryResponseArrayToCountryArray(resp.data.objects ?? [])),
+      catchError((err) => {
+        throw ('Fetching error ' + err);
+      })
     );
   }
 
-  searchByCapital(query: string){
+  searchByCapital(query: string) {
     return this.search(query, '/capitals');
   }
-  searchByCountry(query: string){
+  searchByCountry(query: string) {
     return this.search(query, '');
   }
-  searchByRegion(query: string){
+  searchByRegion(query: string) {
     return this.search(query, '/region');
   }
 }
