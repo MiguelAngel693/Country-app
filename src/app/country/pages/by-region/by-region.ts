@@ -19,7 +19,7 @@ export class ByRegion {
     stream: ({ params }) => {
       if (!params.query) return of([]);
 
-      return this.country.searchByCapital(this.query())
+      return this.country.searchByRegion(this.query())
     }
   })
   // country = inject(CountryService);
