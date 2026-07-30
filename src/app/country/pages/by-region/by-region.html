@@ -1,7 +1,6 @@
 <search-input placeHolder="Buscar por continente" (value)="query.set($event)"></search-input>
-@if (countryResource.error()) {
-  <h3>{{countryResource.error()}}</h3>
-}@if(countryResource.hasValue()) {
-  <list [countries]="countryResource.value()!" />
-}
-
+<list [countries]="countryResource.value()!"
+      [errorMessage]='countryResource.error()'
+      [isEmpty]="countryResource.value()?.length === 0"
+      [isLoading]="countryResource.isLoading()"
+      />
