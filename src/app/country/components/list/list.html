@@ -4,12 +4,12 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Codigo</th>
+        <!-- <th>Codigo</th> -->
         <th>Bandera</th>
         <th>Nombre</th>
         <th>Capital</th>
-        <th>Continente</th>
-        <th>Poblacion</th>
+        <!-- <th>Continente</th> -->
+        <!-- <th>Poblacion</th> -->
 
       </tr>
     </thead>
@@ -18,12 +18,12 @@
        @for (country of countries(); track country.code; let index = $index) {
         <tr>
           <td>{{ index + 1 }}</td>
-          <td>{{country.code}}</td>
+          <!-- <td>{{country.code}}</td> -->
           <td><img class="w-64" [src]="country.flagSvg" alt="Bandera no disponible"></td>
           <td>{{country.name}}</td>
           <td>{{country.capital}}</td>
-          <td>{{country.region}}</td>
-          <td>{{country.population | number}}</td>
+          <!-- <td>{{country.region}}</td> -->
+          <!-- <td>{{country.population | number}}</td> -->
           <td><a [routerLink]="['/country/by',country.code]" class="btn btn-primary">Mas informacion</a></td>
         </tr>
       }
