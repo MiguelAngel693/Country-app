@@ -8,6 +8,6 @@ export interface Country{
   area: number,
   region: string,
   subregion: string,
-  language: string,
+  language: string[],
   borders: string[]
 }
