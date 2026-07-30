@@ -9,12 +9,25 @@ export class CountryMapper{
       flag: countryItem.flag.emoji || 'No disponible',
       flagSvg: countryItem.flag.url_svg || 'No disponible',
       capital: countryItem.capitals[0].name || 'No disponible',
-      population: countryItem.population || 0
+      population: countryItem.population || 0,
+      region: this.translator(countryItem.region),
+      subregion: this.translator(countryItem.subregion),
+      area: countryItem.area.kilometers,
+      language: countryItem.languages[0].name,
+      borders: countryItem.borders
     }
     return country;
   }
 
   static mapCountryResponseArrayToCountryArray(countryItems: RestCountryItem[]): Country[]{
     return countryItems.map(this.mapCountryResponseItemToCountryItem);
+  }
+
+  private static translator(name: string){
+    if(name == 'Americas') return 'América'
+    if(name == 'Europe') return 'Europa'
+    if(name == 'North America') return 'Norteamérica'
+    if(name == 'South America') return 'Sudamérica'
+    return name;
   }
 }
