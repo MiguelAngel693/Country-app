@@ -10,12 +10,10 @@ export class CountryMapper{
       flagSvg: countryItem.flag.url_svg ?? 'No disponible',
       capital: countryItem.capitals[0]?.name ?? 'No disponible',
       population: countryItem.population ?? 0,
-      // region: countryItem.region,
-      // subregion: countryItem.subregion,
       region: CountryMapper.translator(countryItem.region),
       subregion: CountryMapper.translator(countryItem.subregion),
       area: countryItem.area.kilometers,
-      language: countryItem.languages[0]?.name ?? 'null',
+      language: countryItem.languages.map(language => language.native_name),
       borders: countryItem.borders
     }
     return country;
