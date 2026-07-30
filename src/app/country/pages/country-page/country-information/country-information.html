@@ -1,0 +1,35 @@
+<section class="mx-10">
+
+  <h1 class="text-3xl py-2">{{country().name}}</h1>
+  <div class="flex flex-col gap-6 md:flex-row">
+    <div class="md:w-200 md:flex-none">
+      <img class="rounded-2xl" [src]="country().flagSvg" [alt]='country().flag' alt="Bandera no disponible">
+
+    </div>
+    <div class="flex-1 min-w-50 bg-neutral rounded-2xl p-2" >
+      <h1 class="text-xl font-thin text-primary">Capital:</h1>
+      <h1>{{country().capital}}</h1>
+
+      <h1 class="text-xl font-thin text-primary">Poblacion</h1>
+      <h1>{{country().population | number}}</h1>
+
+      <h1 class="text-xl font-thin text-primary">Superficie total</h1>
+      <h1>{{country().area | number}} Km</h1>
+
+      <h1 class="text-xl font-thin text-primary">Frontera con:</h1>
+      <h1>{{country().borders}}</h1>
+
+
+      <h1 class="text-xl font-thin text-primary">Idioma(s) oficial(es):</h1>
+      <h1>{{country().language}}</h1>
+
+      <h1 class="text-xl font-thin text-primary">Continente:</h1>
+      <h1>{{country().region}}</h1>
+
+      <h1 class="text-xl font-thin text-primary">Subcontinente:</h1>
+      <h1>{{country().subregion}}</h1>
+    </div>
+
+  </div>
+
+</section>
