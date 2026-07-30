@@ -8,6 +8,7 @@
         <th>Bandera</th>
         <th>Nombre</th>
         <th>Capital</th>
+        <th>Continente</th>
         <th>Poblacion</th>
 
       </tr>
@@ -21,8 +22,26 @@
           <td><img class="w-64" [src]="country.flagSvg" alt="Bandera no disponible"></td>
           <td>{{country.name}}</td>
           <td>{{country.capital}}</td>
+          <td>{{country.region}}</td>
           <td>{{country.population | number}}</td>
           <td><a [routerLink]="['/country/by',country.code]" class="btn btn-primary">Mas informacion</a></td>
+        </tr>
+      }
+      @if(errorMessage()){
+        <tr>
+          <td colspan="8" class="text-center">{{errorMessage()}}</td>
+        </tr>
+      }
+
+      @if(countries() && countries().length === 0 && !isLoading()){
+        <tr>
+          <td colspan="8" class="text-center">No se encontraron resultados</td>
+        </tr>
+      }
+
+      @if(isLoading()){
+        <tr>
+          <td colspan="8" class="text-center">Cargando</td>
         </tr>
       }
     </tbody>
