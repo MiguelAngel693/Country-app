@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'list',
-  imports: [DecimalPipe, RouterLink],
+  imports: [RouterLink],
   templateUrl: './list.html',
 })
 export class List {
