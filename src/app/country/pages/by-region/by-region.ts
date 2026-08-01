@@ -7,7 +7,7 @@ import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-by-region',
-  imports: [List, RouterLink],
+  imports: [List],
   templateUrl: './by-region.html',
 })
 export class ByRegion {
