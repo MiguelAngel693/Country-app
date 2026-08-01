@@ -2,7 +2,7 @@ import { Component, inject, linkedSignal, signal } from '@angular/core';
 import { List } from "../../components/list/list";
 import { CountryService } from '../../services/CountryService';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router,  } from "@angular/router";
+import { ActivatedRoute, Router, } from "@angular/router";
 import { of } from 'rxjs';
 
 @Component({
@@ -16,9 +16,17 @@ export class ByRegion {
   activatedRoute = inject(ActivatedRoute);
   queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
   query = signal(this.queryParam);
-  selectedRegion = linkedSignal<string>(()=> this.queryParam);
+  selectedRegion = linkedSignal<string>(() => this.queryParam);
 
-  regions: string[] = ["Africa", "America", "Asia", "Europe", "Oceania"]
+  regions: string[] = ["africa", "americas", "asia", "europe", "oceania","antarctic"];
+  regionSpanish = ['África', 'América', 'Asia', 'Europa', 'Oceanía','Antártida'];
+  // regions: Record<string,string> = {
+  //   'africa': 'África',
+  //   'america': 'América',
+  //   'asia': 'Asia',
+  //   'europa': 'Europa',
+  //   'oceania': 'Oceanía',
+  // }
   countryResource = rxResource({
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {

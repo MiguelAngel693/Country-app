@@ -1,7 +1,7 @@
 <!-- <search-input placeHolder="Buscar por continente" (value)="query.set($event)"></search-input> -->
 <section>
   @for (region of regions; track $index) {
-    <button class="btn m-2 w-25" (click)="selectRegion(region)" [class.btn-primary]="selectedRegion()==region">{{region}}</button>
+    <button class="btn m-2 w-25" (click)="selectRegion(region)" [class.btn-primary]="selectedRegion()==region">{{regionSpanish[$index]}}</button>
   }
   <!-- <button class="btn btn-primary m-2" (click)="query.set('Africa')" [routerLink]="['/africa']">Africa</button>
   <button class="btn btn-primary m-2" (click)="query.set('Americas')">America</button>
