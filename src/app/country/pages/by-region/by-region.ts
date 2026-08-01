@@ -1,9 +1,9 @@
-import { Component, inject, resource, signal } from '@angular/core';
+import { Component, inject, linkedSignal, signal } from '@angular/core';
 import { List } from "../../components/list/list";
 import { CountryService } from '../../services/CountryService';
-import { firstValueFrom, of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { RouterLink } from "@angular/router";
+import { ActivatedRoute, Router,  } from "@angular/router";
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-by-region',
@@ -12,20 +12,27 @@ import { RouterLink } from "@angular/router";
 })
 export class ByRegion {
   country = inject(CountryService);
-  query = signal('');
-  regions : string[]=["Africa","America","Asia","Europe","Oceania" ]
-  selectedRegion = signal<string>('');
+  router = inject(Router);
+  activatedRoute = inject(ActivatedRoute);
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
+  query = signal(this.queryParam);
+  selectedRegion = linkedSignal<string>(()=> this.queryParam);
 
+  regions: string[] = ["Africa", "America", "Asia", "Europe", "Oceania"]
   countryResource = rxResource({
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {
       if (!params.query) return of([]);
-
+      this.router.navigate(['/country/by-region/'], {
+        queryParams: {
+          query: params.query,
+        }
+      })
       return this.country.searchByRegion(this.query())
     }
   })
 
-  selectRegion(value: string){
+  selectRegion(value: string) {
     this.query.set(value);
     this.selectedRegion.set(value);
   }

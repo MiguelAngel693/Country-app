@@ -4,6 +4,7 @@ import { List } from "../../components/list/list";
 import { CountryService } from '../../services/CountryService';
 import { firstValueFrom, of } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-by-country',
@@ -11,16 +12,22 @@ import { rxResource } from '@angular/core/rxjs-interop';
   templateUrl: './by-country.html',
 })
 export class ByCountry {
-
-
   country = inject(CountryService);
-  query = signal('');
+  activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
 
-    countryResource = rxResource({
+  queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
+  query = signal(this.queryParam);
+
+  countryResource = rxResource({
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {
       if (!params.query) return of([]);
-
+      this.router.navigate(['/country/by-country/'], {
+        queryParams: {
+          query: params.query,
+        }
+      })
       return this.country.searchByCountry(this.query())
     }
   })
